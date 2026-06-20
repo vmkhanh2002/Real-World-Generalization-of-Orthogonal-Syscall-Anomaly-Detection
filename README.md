@@ -72,11 +72,11 @@ Ten attack families are available as individual archives:
 
 Each archive contains `raw_strace/`, `adfa_ld_out/` (ADFA-LD i386 format), and `docker/` (Docker Compose lab setup for re-capture).
 
-The **ADFA-LD training dataset** (benign + original attack families) is a separate academic release — download it from the [ADFA-LD project page](https://research.unsw.edu.au/projects/adfa-ids-datasets) and place it at `datasets/32bit/ADFA-LD/ADFA-LD/`.
+The **ADFA-LD training dataset** (benign + original attack families) is a separate academic release - download it from the [ADFA-LD project page](https://research.unsw.edu.au/projects/adfa-ids-datasets) and place it at `datasets/32bit/ADFA-LD/ADFA-LD/`.
 
 ## Pre-trained Models
 
-All models are included in `models/32bit/` — **no retraining is required** to reproduce the paper results.
+All models are included in `models/32bit/` - **no retraining is required** to reproduce the paper results.
 
 | Directory | Contents |
 |-----------|----------|
@@ -108,7 +108,7 @@ python scripts/benchmark/reviewer_benchmark_scale_harmonization.py --dataset 32b
 
 ## Training Pipeline
 
-Retrain all models from scratch using the ADFA-LD dataset (optional — pre-trained models are already included).
+Retrain all models from scratch using the ADFA-LD dataset (optional - pre-trained models are already included).
 
 Canonical training flow for the `32bit` dataset:
 
@@ -283,7 +283,7 @@ Outputs:
 - CPU-only setup: do not use the `+cu121` dependency lines in `requirements.txt`.
 - Realtime evaluation fails on syscall-name input: convert to numeric syscall traces with `scripts/syscall_abi/process_drop.py`.
 - Docker capture fails on Windows Git Bash: the script sets `MSYS_NO_PATHCONV=1`; if issues persist, run it from WSL.
-- Missing `models/32bit/phase5_fusion/` or other model files: run `git clone` again — model checkpoints are stored directly in the repository as regular files.
+- Missing `models/32bit/phase5_fusion/` or other model files: run `git clone` again - model checkpoints are stored directly in the repository as regular files.
 - Missing `datasets/`: download from [Zenodo DOI 10.5281/zenodo.20776518](https://doi.org/10.5281/zenodo.20776518) and extract each archive under `datasets/`.
 
 ## Additional Documentation
