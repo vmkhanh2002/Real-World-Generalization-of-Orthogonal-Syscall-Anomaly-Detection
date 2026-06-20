@@ -1,0 +1,75 @@
+{
+  "SGD-OCSVM": {
+    "feature": "word(1,2)_1k_sub",
+    "tfidf_analyzer": "word",
+    "tfidf_ngram_range": [
+      1,
+      2
+    ],
+    "tfidf_max_features": 1000,
+    "tfidf_sublinear_tf": true,
+    "reduction": "PCA(100)",
+    "pca_n_components": 100,
+    "hyperparam": {
+      "nu": 0.01
+    }
+  },
+  "IsolationForest": {
+    "feature": "charwb(3,3)_2k_sub",
+    "tfidf_analyzer": "char_wb",
+    "tfidf_ngram_range": [
+      3,
+      3
+    ],
+    "tfidf_max_features": 2000,
+    "tfidf_sublinear_tf": true,
+    "reduction": "SVD(50)",
+    "pca_n_components": 50,
+    "hyperparam": {}
+  },
+  "LOF": {
+    "feature": "charwb(3,5)_2k_sub",
+    "tfidf_analyzer": "char_wb",
+    "tfidf_ngram_range": [
+      3,
+      5
+    ],
+    "tfidf_max_features": 2000,
+    "tfidf_sublinear_tf": true,
+    "reduction": "PCA(50)",
+    "pca_n_components": 50,
+    "hyperparam": {
+      "k": 50
+    }
+  },
+  "PCA-Error": {
+    "feature": "charwb(3,3)_2k_sub",
+    "tfidf_analyzer": "char_wb",
+    "tfidf_ngram_range": [
+      3,
+      3
+    ],
+    "tfidf_max_features": 2000,
+    "tfidf_sublinear_tf": true,
+    "reduction": "PCA-Error-auto",
+    "pca_n_components": 12,
+    "hyperparam": {
+      "n_components": 12
+    }
+  },
+  "HBOS": {
+    "feature": "word(1,2)_1k_sub",
+    "tfidf_analyzer": "word",
+    "tfidf_ngram_range": [
+      1,
+      2
+    ],
+    "tfidf_max_features": 1000,
+    "tfidf_sublinear_tf": true,
+    "reduction": "PCA(100)",
+    "pca_n_components": 100,
+    "hyperparam": {
+      "n_bins": 80
+    }
+  }
+}

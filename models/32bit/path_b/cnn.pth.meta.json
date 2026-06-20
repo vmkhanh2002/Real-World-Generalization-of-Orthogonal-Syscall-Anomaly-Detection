@@ -1,0 +1,25 @@
+{
+  "schema_version": "1.0",
+  "model_class": "Conv1DAE",
+  "init_kwargs": {
+    "vocab_size": 341,
+    "embed_dim": 8
+  },
+  "dataset": "32bit",
+  "source_script": "train_path_b.py",
+  "saved_at_utc": "2026-04-28T19:29:21.448921Z",
+  "extra": {
+    "epochs": 15,
+    "fraction": 0.2,
+    "min_samples": 5000,
+    "embed_dim": 8,
+    "dense_latent_dim": 16,
+    "lstm_hidden_dim": 16,
+    "vae_latent_dim": 16,
+    "svdd_hidden_dim": 32,
+    "calibration_quantile": 0.95,
+    "model_key": "CNN1D_AE",
+    "best_seed": 42,
+    "auc": 0.7822459222359108
+  }
+}

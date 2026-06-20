@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "episode_id": "adfa_ld_stream_demo_0001",
+  "source_file": "datasets/32bit/ADFA-LD/ADFA-LD/Attack_Data_Master/Hydra_SSH_3/UAD-Hydra-SSH-3-1234.txt",
+  "window_size": 20,
+  "stride": 2,
+  "n_windows": 420,
+  "attack_family": "Hydra_SSH",
+  "ground_truth_segments": [
+    {
+      "label": "benign",
+      "start_window": 0,
+      "end_window": 119
+    },
+    {
+      "label": "attack",
+      "start_window": 120,
+      "end_window": 289
+    },
+    {
+      "label": "benign",
+      "start_window": 290,
+      "end_window": 419
+    }
+  ],
+  "metadata": {
+    "construction_mode": "benign_prefix_attack_suffix",
+    "notes": "Draft schema for real-time benchmark episodes."
+  }
+}
+
+

@@ -1,0 +1,40 @@
+{
+  "Markov": {
+    "fraction": 0.3,
+    "order": 3,
+    "AUC": 0.7966,
+    "F1_calib": 0.4287,
+    "source": "path_c_results.json"
+  },
+  "GRU_Predictor": {
+    "fraction": 0.5,
+    "embed_dim": 16,
+    "hidden_dim": 192,
+    "num_layers": 1,
+    "AUC": 0.8151,
+    "F1_calib": 0.4313,
+    "source": "path_c_results.json"
+  },
+  "LSTM_AE_Sequence": {
+    "fraction": 0.2,
+    "embed_dim": 16,
+    "hidden_dim": 64,
+    "AUC": 0.6606,
+    "F1_calib": 0.3174,
+    "source": "path_c_results.json"
+  },
+  "CBOW_Predictor": {
+    "fraction": 0.2,
+    "embed_dim": 16,
+    "AUC": 0.7712,
+    "F1_calib": 0.7624,
+    "source": "path_c_results.json"
+  },
+  "HMM": {
+    "fraction": 0.1,
+    "n_components": 4,
+    "AUC": 0.6792,
+    "F1_calib": 0.3138,
+    "source": "path_c_results.json"
+  }
+}

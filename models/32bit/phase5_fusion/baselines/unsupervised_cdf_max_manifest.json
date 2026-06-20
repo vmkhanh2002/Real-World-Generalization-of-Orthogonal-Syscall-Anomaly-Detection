@@ -1,0 +1,28 @@
+{
+    "artifact_type": "phase5_score_space_baseline",
+    "artifact_version": 1,
+    "artifact_name": "unsupervised_cdf_max",
+    "created_utc": "2026-03-23T15:32:32.541259+00:00",
+    "dataset": "32bit",
+    "selected_paths": {
+        "source": "phase5_manifest",
+        "path_a": "sgd_ocsvm",
+        "path_b": "cnn1d_ae",
+        "path_c": "gru_predictor",
+        "path_a_label": "SGD-OCSVM",
+        "path_b_label": "CNN1D_AE",
+        "path_c_label": "GRU_Predictor"
+    },
+    "model_name": "QuantileTransformer_Max",
+    "protocol": "unsupervised_cdf_max",
+    "training_scope": "benign_z_train_only",
+    "threshold_method": "best_f1_on_z_val",
+    "threshold_tau": 0.7897879115508589,
+    "metrics": {
+        "AUC": 0.6818,
+        "F1": 0.7644,
+        "F1_val": 0.8889
+    },
+    "model_file": "D:\\Semi-Supervised Novel Detection via Orthogonal Feature Extraction and Meta-Classifier Assembly\\models\\32bit\\phase5_fusion\\baselines\\unsupervised_cdf_max.pkl",
+    "manifest_file": "D:\\Semi-Supervised Novel Detection via Orthogonal Feature Extraction and Meta-Classifier Assembly\\models\\32bit\\phase5_fusion\\baselines\\unsupervised_cdf_max_manifest.json"
+}

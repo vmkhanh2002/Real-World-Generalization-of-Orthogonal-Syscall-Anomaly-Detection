@@ -1,0 +1,32 @@
+{
+  "CNN1D_AE": {
+    "embed_dim": 8,
+    "fraction": 0.2,
+    "AUC": 0.7822,
+    "F1_calib": 0.4599
+  },
+  "Dense_AE": {
+    "latent_dim": 16,
+    "fraction": 0.2,
+    "AUC": 0.6044,
+    "F1_calib": 0.2848
+  },
+  "LSTM_AE": {
+    "hidden_dim": 16,
+    "fraction": 0.2,
+    "AUC": 0.5397,
+    "F1_calib": 0.2816
+  },
+  "VAE": {
+    "latent_dim": 16,
+    "fraction": 0.2,
+    "AUC": 0.6303,
+    "F1_calib": 0.3746
+  },
+  "DeepSVDD": {
+    "hidden": 32,
+    "fraction": 0.2,
+    "AUC": 0.4257,
+    "F1_calib": 0.2293
+  }
+}

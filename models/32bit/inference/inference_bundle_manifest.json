@@ -1,0 +1,102 @@
+{
+  "dataset": "32bit",
+  "config": {
+    "paths": "both",
+    "selection_source": "nested_majority",
+    "protocol_report": "D:\\Semi-Supervised Novel Detection via Orthogonal Feature Extraction and Meta-Classifier Assembly\\experiments\\32bit\\logs\\path_bc_eval_protocol_comparison.json",
+    "calib_ratio": 0.5,
+    "batch_size": 1024,
+    "max_windows_per_split": null,
+    "seed": 42
+  },
+  "bundle_root": "D:\\Semi-Supervised Novel Detection via Orthogonal Feature Extraction and Meta-Classifier Assembly\\models\\32bit\\inference",
+  "created_at_utc": "2026-03-24T22:25:20.775833Z",
+  "results": {
+    "path_b": {
+      "path": "path_b",
+      "selected_variant": "cnn",
+      "selection_source": "nested_majority",
+      "selected_variant_counts": {
+        "cnn": 5
+      },
+      "tau_star": 0.07498086988925934,
+      "F1_calib": 0.44493135910869425,
+      "test_metrics_reference": {
+        "AUC_ROC": 0.7917493856449066,
+        "AUPR": 0.3540340261514143,
+        "F1": 0.47306780749453686,
+        "Precision": 0.36692132383505094,
+        "Recall": 0.6656265845001755,
+        "Specificity": 0.8253069231742818,
+        "Balanced_Accuracy": 0.7454667538372286,
+        "MCC": 0.38940357937738185,
+        "FPR": 0.17469307682571827,
+        "FNR": 0.33437341549982447,
+        "TP": 51198,
+        "FP": 88336,
+        "TN": 417328,
+        "FN": 25719
+      },
+      "sizes": {
+        "calib_windows": 589487,
+        "test_windows": 582581,
+        "calib_norm_windows": 514613,
+        "calib_attack_windows": 74874,
+        "test_norm_windows": 505664,
+        "test_attack_windows": 76917,
+        "calib_norm_traces": 2186,
+        "calib_attack_traces": 373,
+        "test_norm_traces": 2186,
+        "test_attack_traces": 373
+      },
+      "source_checkpoint": "D:\\Semi-Supervised Novel Detection via Orthogonal Feature Extraction and Meta-Classifier Assembly\\models\\32bit\\path_b\\cnn.pth",
+      "bundle_checkpoint": "D:\\Semi-Supervised Novel Detection via Orthogonal Feature Extraction and Meta-Classifier Assembly\\models\\32bit\\inference\\path_b\\model.pth",
+      "bundle_meta": "D:\\Semi-Supervised Novel Detection via Orthogonal Feature Extraction and Meta-Classifier Assembly\\models\\32bit\\inference\\path_b\\model.pth.meta.json",
+      "threshold_file": "D:\\Semi-Supervised Novel Detection via Orthogonal Feature Extraction and Meta-Classifier Assembly\\models\\32bit\\inference\\path_b\\threshold_tau.json",
+      "manifest_file": "D:\\Semi-Supervised Novel Detection via Orthogonal Feature Extraction and Meta-Classifier Assembly\\models\\32bit\\inference\\path_b\\manifest.json"
+    },
+    "path_c": {
+      "path": "path_c",
+      "selected_variant": "gru",
+      "selection_source": "nested_majority",
+      "selected_variant_counts": {
+        "gru": 5
+      },
+      "tau_star": 1.4772895574569702,
+      "F1_calib": 0.4198683519240428,
+      "test_metrics_reference": {
+        "AUC_ROC": 0.8190051657173959,
+        "AUPR": 0.3954133726768444,
+        "F1": 0.4427368295700383,
+        "Precision": 0.29691333649823193,
+        "Recall": 0.8700417332969305,
+        "Specificity": 0.6866140361979496,
+        "Balanced_Accuracy": 0.77832788474744,
+        "MCC": 0.3869115381207994,
+        "FPR": 0.31338596380205036,
+        "FNR": 0.12995826670306954,
+        "TP": 66921,
+        "FP": 158468,
+        "TN": 347196,
+        "FN": 9996
+      },
+      "sizes": {
+        "calib_windows": 589487,
+        "test_windows": 582581,
+        "calib_norm_windows": 514613,
+        "calib_attack_windows": 74874,
+        "test_norm_windows": 505664,
+        "test_attack_windows": 76917,
+        "calib_norm_traces": 2186,
+        "calib_attack_traces": 373,
+        "test_norm_traces": 2186,
+        "test_attack_traces": 373
+      },
+      "source_checkpoint": "D:\\Semi-Supervised Novel Detection via Orthogonal Feature Extraction and Meta-Classifier Assembly\\models\\32bit\\path_c\\gru.pth",
+      "bundle_checkpoint": "D:\\Semi-Supervised Novel Detection via Orthogonal Feature Extraction and Meta-Classifier Assembly\\models\\32bit\\inference\\path_c\\model.pth",
+      "bundle_meta": "D:\\Semi-Supervised Novel Detection via Orthogonal Feature Extraction and Meta-Classifier Assembly\\models\\32bit\\inference\\path_c\\model.pth.meta.json",
+      "threshold_file": "D:\\Semi-Supervised Novel Detection via Orthogonal Feature Extraction and Meta-Classifier Assembly\\models\\32bit\\inference\\path_c\\threshold_tau.json",
+      "manifest_file": "D:\\Semi-Supervised Novel Detection via Orthogonal Feature Extraction and Meta-Classifier Assembly\\models\\32bit\\inference\\path_c\\manifest.json"
+    }
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "policy_name": "rolling_hysteresis_v1",
+  "summary": {
+    "episodes_total": 500,
+    "attack_episodes": 250,
+    "benign_episodes": 250,
+    "episode_recall": 0.78,
+    "median_detection_delay_windows": 8,
+    "p90_detection_delay_windows": 21,
+    "false_alert_rate_per_benign_episode": 0.12,
+    "false_alert_windows_per_1000_benign_windows": 3.8,
+    "alert_precision_episode_level": 0.71
+  },
+  "family_metrics": {
+    "Hydra_SSH": {
+      "attack_episodes": 60,
+      "episode_recall": 0.58,
+      "recall_within_5_windows": 0.27,
+      "recall_within_10_windows": 0.42,
+      "recall_within_20_windows": 0.55,
+      "median_detection_delay_windows": 14
+    },
+    "Java_Meterpreter": {
+      "attack_episodes": 40,
+      "episode_recall": 0.92,
+      "recall_within_5_windows": 0.76,
+      "recall_within_10_windows": 0.88,
+      "recall_within_20_windows": 0.92,
+      "median_detection_delay_windows": 4
+    }
+  },
+  "episode_results": [
+    {
+      "episode_id": "adfa_ld_stream_demo_0001",
+      "attack_family": "Hydra_SSH",
+      "detected": true,
+      "first_alert_window": 133,
+      "attack_start_window": 120,
+      "attack_end_window": 289,
+      "detection_delay_windows": 13,
+      "false_alert_before_attack": false,
+      "alert_flicker_count": 1,
+      "recovery_delay_after_attack_end": 11
+    }
+  ]
+}
+

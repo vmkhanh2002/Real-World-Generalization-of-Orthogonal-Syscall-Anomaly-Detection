@@ -1,0 +1,31 @@
+{
+  "protocol": "LOAO-replicated (50K benign pool, 40% test split, tau*=0.401214)",
+  "window_size": 20,
+  "benign_pool_size": 50000,
+  "neg_test_size": 19480,
+  "tau_star": 0.401214,
+  "seed": 42,
+  "note": "Novel family \u2014 no LOAO paper constants. Zero-shot generalization.",
+  "real_nikto": {
+    "AUC": 0.8608,
+    "AUCPR": 0.9976,
+    "AUCPR_1to1": 0.7668,
+    "F1": 0.9951,
+    "TPR@FPR1%": 0.0215,
+    "TPR@FPR01%": 0.0,
+    "n_pos": 2677437,
+    "n_neg": 19480
+  },
+  "detection_rate_by_family": {
+    "Nikto_Real": {
+      "n_traces": 1103,
+      "detected_traces": 1103,
+      "trace_dr": 1.0,
+      "total_windows": 2677437,
+      "flagged_windows": 2656756,
+      "window_dr": 0.9923,
+      "median_per_trace": 0.9937,
+      "p10_per_trace": 0.9887
+    }
+  }
+}

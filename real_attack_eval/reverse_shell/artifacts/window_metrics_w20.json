@@ -1,0 +1,30 @@
+{
+  "protocol": "LOAO-replicated (50K benign pool, 40% test split, tau*=0.401214)",
+  "window_size": 20,
+  "benign_pool_size": 50000,
+  "neg_test_size": 19480,
+  "tau_star": 0.401214,
+  "seed": 42,
+  "real_reverse_shell": {
+    "AUC": 0.7289,
+    "AUCPR": 0.9898,
+    "AUCPR_1to1": 0.5968,
+    "F1": 0.7952,
+    "TPR@FPR1%": 0.0,
+    "TPR@FPR01%": 0.0,
+    "n_pos": 1849192,
+    "n_neg": 19480
+  },
+  "detection_rate_by_family": {
+    "ReverseShell_Real": {
+      "n_traces": 1331,
+      "detected_traces": 1331,
+      "trace_dr": 1.0,
+      "total_windows": 1849192,
+      "flagged_windows": 1223934,
+      "window_dr": 0.6619,
+      "median_per_trace": 0.4706,
+      "p10_per_trace": 0.1481
+    }
+  }
+}

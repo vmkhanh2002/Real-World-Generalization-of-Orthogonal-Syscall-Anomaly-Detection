@@ -1,0 +1,28 @@
+{
+  "model_key": "HMM",
+  "dataset": "32bit",
+  "source_script": "train_path_c.py",
+  "config": {
+    "fraction": 0.1,
+    "n_components": 4
+  },
+  "metrics": {
+    "AUC": 0.6792,
+    "AUPR": 0.2463,
+    "F1": 0.3138,
+    "F1_calib": 0.3138,
+    "F1_oracle": 0.3138,
+    "FPR_at_TPR95": 0.6481,
+    "threshold": 2.3694,
+    "threshold_oracle": 2.3694,
+    "calibration": {
+      "method": "pr_curve_best_f1",
+      "split": "full_test_set",
+      "score_direction": "higher_is_more_anomalous"
+    },
+    "config": {
+      "fraction": 0.1,
+      "n_components": 4
+    }
+  }
+}

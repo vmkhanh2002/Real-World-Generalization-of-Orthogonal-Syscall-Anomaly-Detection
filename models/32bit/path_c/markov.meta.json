@@ -1,0 +1,28 @@
+{
+  "model_key": "Markov",
+  "dataset": "32bit",
+  "source_script": "train_path_c.py",
+  "config": {
+    "fraction": 0.3,
+    "order": 3
+  },
+  "metrics": {
+    "AUC": 0.7966,
+    "AUPR": 0.3331,
+    "F1": 0.4287,
+    "F1_calib": 0.4287,
+    "F1_oracle": 0.4287,
+    "FPR_at_TPR95": 0.4475,
+    "threshold": 1.541677,
+    "threshold_oracle": 1.541677,
+    "calibration": {
+      "method": "pr_curve_best_f1",
+      "split": "full_test_set",
+      "score_direction": "higher_is_more_anomalous"
+    },
+    "config": {
+      "fraction": 0.3,
+      "order": 3
+    }
+  }
+}

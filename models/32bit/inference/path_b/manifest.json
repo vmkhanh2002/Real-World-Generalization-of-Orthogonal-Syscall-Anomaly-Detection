@@ -1,0 +1,34 @@
+{
+  "dataset": "32bit",
+  "path": "path_b",
+  "selected_variant": "cnn",
+  "selection_source": "nested_majority",
+  "selected_variant_counts": {
+    "cnn": 5
+  },
+  "source_checkpoint": "D:\\Semi-Supervised Novel Detection via Orthogonal Feature Extraction and Meta-Classifier Assembly\\models\\32bit\\path_b\\cnn.pth",
+  "bundle_checkpoint": "D:\\Semi-Supervised Novel Detection via Orthogonal Feature Extraction and Meta-Classifier Assembly\\models\\32bit\\inference\\path_b\\model.pth",
+  "source_meta": "D:\\Semi-Supervised Novel Detection via Orthogonal Feature Extraction and Meta-Classifier Assembly\\models\\32bit\\path_b\\cnn.pth.meta.json",
+  "bundle_meta": "D:\\Semi-Supervised Novel Detection via Orthogonal Feature Extraction and Meta-Classifier Assembly\\models\\32bit\\inference\\path_b\\model.pth.meta.json",
+  "tau_file": "D:\\Semi-Supervised Novel Detection via Orthogonal Feature Extraction and Meta-Classifier Assembly\\models\\32bit\\inference\\path_b\\threshold_tau.json",
+  "calibration_protocol": "trace_holdout_split",
+  "calib_ratio": 0.5,
+  "seed": 42,
+  "reference_test_metrics": {
+    "AUC_ROC": 0.7917493856449066,
+    "AUPR": 0.3540340261514143,
+    "F1": 0.47306780749453686,
+    "Precision": 0.36692132383505094,
+    "Recall": 0.6656265845001755,
+    "Specificity": 0.8253069231742818,
+    "Balanced_Accuracy": 0.7454667538372286,
+    "MCC": 0.38940357937738185,
+    "FPR": 0.17469307682571827,
+    "FNR": 0.33437341549982447,
+    "TP": 51198,
+    "FP": 88336,
+    "TN": 417328,
+    "FN": 25719
+  },
+  "created_at_utc": "2026-03-24T22:20:09.602972Z"
+}

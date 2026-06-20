@@ -1,0 +1,265 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{pdflscape}
+\usepackage{hyperref}
+\usepackage{xcolor}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=black,
+  urlcolor=blue
+}
+
+\setlength{\parskip}{0.55em}
+\setlength{\parindent}{0pt}
+
+\title{Real-Attack Evaluation Report}
+\author{Project evaluation notes}
+\date{June 2026}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+This report reviews the current \texttt{real\_attack\_eval} results. The evaluation uses the trained Phase 5 fusion detector and runs it on victim-side syscall traces from live attack scenarios. The detector is not retrained in this folder. It is tested as-is against both ADFA-LD attack families and novel families that were not part of ADFA-LD training. The current results show strong trace-level attack presence detection, but weaker and less stable window-level calibration on several families.
+\end{abstract}
+
+\section{Overview}
+
+The \texttt{real\_attack\_eval} folder is an evaluation harness, not a training pipeline. Its purpose is to answer a practical question:
+
+\begin{quote}
+If the Phase 5 detector is trained and calibrated on ADFA-LD, how does it behave on newer victim-side traces from live attack runs?
+\end{quote}
+
+The folder contains a local copy of the inference code, selected model artifacts, a shared ADFA-LD benign window pool, and one subfolder per attack family. Each family stores its own manifest, per-window score file, and metrics file.
+
+The current evaluation covers eleven reported rows. Hydra is one capture family, but its FTP and SSH results are reported separately because they have different syscall profiles.
+
+\begin{table}[htbp]
+\centering
+\caption{Families included in the current evaluation.}
+\label{tab:families}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{@{}lllp{0.42\linewidth}@{}}
+\toprule
+Family & Group & Scenario count & Capture target \\
+\midrule
+Hydra FTP & ADFA-LD family & 1 & vsftpd worker under repeated FTP login attempts \\
+Hydra SSH & ADFA-LD family & 1 & OpenSSH worker under repeated SSH login attempts \\
+Adduser & ADFA-LD family & 6 & SSH session and child shell running user-addition variants \\
+Web Shell & ADFA-LD family & 8 & Apache/PHP workers after DVWA upload and web shell execution \\
+Meterpreter & ADFA-LD family & 10 & vsftpd 2.3.4 backdoor shell workflow \\
+Java Meterpreter & ADFA-LD family & 8 & Java runtime and child processes for MSF Java Meterpreter payload \\
+Reverse Shell & Novel family & 6 & Python bind shell and spawned bash process \\
+SQLMap & Novel family & 5 & Apache/PHP/SQLite handling SQLMap probes \\
+Nikto & Novel family & 4 & Apache workers under Nikto scan profiles \\
+Shellshock & Novel family & 6 & Apache CGI path and bash children for CVE-2014-6271 variants \\
+Cryptominer & Novel family & 4 & Fake miner process with different thread counts \\
+\bottomrule
+\end{tabular}
+}
+\end{table}
+
+\section{Evaluation Protocol}
+
+The active detector is the Phase 5 XGBoost meta-classifier from the 32-bit pipeline. It combines three anomaly scores:
+
+\begin{itemize}
+  \item Path A: TF-IDF + PCA + SGD one-class SVM;
+  \item Path B: CNN-1D autoencoder;
+  \item Path C: GRU next-syscall predictor.
+\end{itemize}
+
+The Phase 5 manifest reports \texttt{AUC\_test = 0.9113} on the original held-out ADFA-LD protocol. The operating threshold used in this evaluation is
+\[
+\tau^* = 0.401214.
+\]
+
+All family metrics are computed with the same settings:
+
+\begin{itemize}
+  \item window size: 20 syscalls;
+  \item stride: 2 syscalls;
+  \item syscall ABI: i386;
+  \item benign pool: 50,000 ADFA-LD benign windows;
+  \item benign test split: 40\% by trace group;
+  \item random seed: 42.
+\end{itemize}
+
+The data flow is:
+
+\begin{enumerate}
+  \item capture victim-side syscall traces with \texttt{strace -f};
+  \item filter traces to the victim process tree;
+  \item map syscall names to i386 syscall numbers;
+  \item write ADFA-LD-style space-separated syscall sequences;
+  \item score sliding windows with the Phase 5 inference stack;
+  \item compute window-level metrics and trace-level detection rates.
+\end{enumerate}
+
+The score rows inspected during this review use the i386 mapping and show \texttt{oov\_rate = 0.0} in sampled traces. This makes a gross syscall ABI or name-mapping error unlikely. The weaker results are better explained by environment shift and threshold calibration.
+
+\section{Main Results}
+
+Table~\ref{tab:main-results} is the main result table. It should be read before the larger metric table. It includes only the metrics needed to understand the current state: number of traces, trace-level detection rate, window-level detection rate, AUC, and AUCPR(1:1).
+
+\begin{longtable}{@{}lrrrrr@{}}
+\caption{Main real-attack evaluation results.}
+\label{tab:main-results}\\
+\toprule
+Family & Traces & Trace-DR & Window-DR & AUC & AUCPR(1:1) \\
+\midrule
+\endfirsthead
+\toprule
+Family & Traces & Trace-DR & Window-DR & AUC & AUCPR(1:1) \\
+\midrule
+\endhead
+Hydra FTP & 15,272 & 100.0\% & 93.8\% & 0.8684 & 0.7945 \\
+Hydra SSH & 5,360 & 100.0\% & 58.6\% & 0.7451 & 0.6460 \\
+Adduser & 3,393 & 100.0\% & 58.4\% & 0.7364 & 0.6475 \\
+Web Shell & 2,584 & 100.0\% & 85.3\% & 0.8639 & 0.7781 \\
+Meterpreter & 2,000 & 100.0\% & 81.5\% & 0.7925 & 0.6707 \\
+Java Meterpreter & 21,536 & 100.0\%* & 30.1\% & 0.4723 & 0.4773 \\
+Reverse Shell & 1,331 & 100.0\% & 66.2\% & 0.7289 & 0.5968 \\
+SQLMap & 1,801 & 100.0\% & 98.6\% & 0.8900 & 0.7986 \\
+Nikto & 1,103 & 100.0\% & 99.2\% & 0.8608 & 0.7668 \\
+Shellshock & 1,083 & 100.0\% & 29.5\% & 0.6227 & 0.5505 \\
+Cryptominer & 1,203 & 100.0\% & 55.3\% & 0.7040 & 0.5981 \\
+\bottomrule
+\end{longtable}
+
+\noindent *Java Meterpreter detects 21,535 of 21,536 traces; rounded Trace-DR is still 100.0\%.
+
+Across all families, the artifacts contain 56,666 attack traces. The trace-level rule detects 56,665 of them. Across windows, 8,268,189 of 13,138,516 attack windows are above the fixed threshold, giving an aggregate Window-DR of 62.9\%.
+
+\begin{landscape}
+\scriptsize
+\setlength{\tabcolsep}{3pt}
+\begin{longtable}{@{}lrrrrrrrrrr@{}}
+\caption{Full window-level metrics from the current artifacts.}
+\label{tab:full-metrics}\\
+\toprule
+Family & Attack windows & Benign test & AUC & AUCPR & AUCPR(1:1) & F1@tau & TPR@1\% FPR & TPR@0.1\% FPR & Median & P10 \\
+\midrule
+\endfirsthead
+\toprule
+Family & Attack windows & Benign test & AUC & AUCPR & AUCPR(1:1) & F1@tau & TPR@1\% FPR & TPR@0.1\% FPR & Median & P10 \\
+\midrule
+\endhead
+Hydra FTP & 358,565 & 19,480 & 0.8684 & 0.9855 & 0.7945 & 0.9606 & 0.0638 & 0.0000 & 1.0000 & 0.7879 \\
+Hydra SSH & 2,738,916 & 19,480 & 0.7451 & 0.9958 & 0.6460 & 0.7377 & 0.0035 & 0.0000 & 0.5789 & 0.4954 \\
+Adduser & 724,334 & 19,480 & 0.7364 & 0.9850 & 0.6475 & 0.7339 & 0.0109 & 0.0000 & 0.5829 & 0.2174 \\
+Web Shell & 53,244 & 19,480 & 0.8639 & 0.9010 & 0.7781 & 0.8729 & 0.0003 & 0.0000 & 0.8500 & 0.8500 \\
+Meterpreter & 58,264 & 19,480 & 0.7925 & 0.8508 & 0.6707 & 0.8548 & 0.0000 & 0.0000 & 0.8333 & 0.7143 \\
+Java Meterpreter & 3,853,379 & 19,480 & 0.4723 & 0.9936 & 0.4773 & 0.4626 & 0.0000 & 0.0000 & 0.5732 & 0.0667 \\
+Reverse Shell & 1,849,192 & 19,480 & 0.7289 & 0.9898 & 0.5968 & 0.7952 & 0.0000 & 0.0000 & 0.4706 & 0.1481 \\
+SQLMap & 752,669 & 19,480 & 0.8900 & 0.9930 & 0.7986 & 0.9893 & 0.0047 & 0.0000 & 0.9921 & 0.9632 \\
+Nikto & 2,677,437 & 19,480 & 0.8608 & 0.9976 & 0.7668 & 0.9951 & 0.0215 & 0.0000 & 0.9937 & 0.9887 \\
+Shellshock & 44,799 & 19,480 & 0.6227 & 0.7347 & 0.5505 & 0.4168 & 0.0216 & 0.0000 & 0.2955 & 0.1579 \\
+Cryptominer & 27,717 & 19,480 & 0.7040 & 0.6755 & 0.5981 & 0.6334 & 0.0000 & 0.0000 & 0.5714 & 0.4706 \\
+\bottomrule
+\end{longtable}
+\normalsize
+\end{landscape}
+
+Raw AUCPR and F1@tau are kept in Table~\ref{tab:full-metrics} because the artifact files store them. They are useful for auditing a run, but they are not the best cross-family comparison metrics. AUC, AUCPR(1:1), Window-DR, and low-FPR TPR are easier to compare across families.
+
+\section{Comparison with ADFA-LD Baselines}
+
+The ADFA-LD-family rows have paper or LOAO reference values. Table~\ref{tab:baseline-comparison} shows the gap between those reference values and the current real captures.
+
+\begin{table}[htbp]
+\centering
+\caption{ADFA-LD-family comparison. Delta is Real AUC minus Paper AUC.}
+\label{tab:baseline-comparison}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{@{}lrrrrr@{}}
+\toprule
+Family & Paper AUC & Real AUC & Delta AUC & Paper AUCPR(1:1) & Real AUCPR(1:1) \\
+\midrule
+Hydra FTP & 0.9112 & 0.8684 & -0.0428 & 0.8786 & 0.7945 \\
+Hydra SSH & 0.8970 & 0.7451 & -0.1519 & 0.8694 & 0.6460 \\
+Adduser & 0.9052 & 0.7364 & -0.1688 & 0.8676 & 0.6475 \\
+Web Shell & 0.9073 & 0.8639 & -0.0434 & 0.8814 & 0.7781 \\
+Meterpreter & 0.9140 & 0.7925 & -0.1215 & 0.8933 & 0.6707 \\
+Java Meterpreter & 0.9140 & 0.4723 & -0.4417 & 0.8742 & 0.4773 \\
+\bottomrule
+\end{tabular}
+}
+\end{table}
+
+Hydra FTP and Web Shell transfer better than the other ADFA-LD families. Their real traces still contain dense bursts of I/O, fork, and network activity that resemble the attack signal learned from ADFA-LD.
+
+Hydra SSH, Adduser, Meterpreter, and Java Meterpreter show larger gaps. The largest gap is Java Meterpreter. Its JVM runtime adds many windows dominated by synchronization, memory mapping, and library behavior. Those windows dilute the payload signal and make the window ranking weak.
+
+\section{Novel-Family Zero-Shot Results}
+
+The novel families were not part of ADFA-LD training. They do not have paper baseline constants. The goal here is not to measure a gap against ADFA-LD paper rows, but to check whether the detector fires on attack behavior it did not see as a named training family.
+
+\begin{table}[htbp]
+\centering
+\caption{Novel family descriptions and expected syscall signals.}
+\label{tab:novel-descriptions}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{@{}lp{0.26\linewidth}p{0.42\linewidth}rr@{}}
+\toprule
+Family & Why it is novel here & Expected syscall signal & AUC & Window-DR \\
+\midrule
+Reverse Shell & Bash-native socket-to-shell control path & socket, exec, read, and write bursts mixed with shell activity & 0.7289 & 66.2\% \\
+SQLMap & SQL injection tool, not an ADFA-LD family & repeated HTTP requests, PHP handling, and SQLite file I/O & 0.8900 & 98.6\% \\
+Nikto & Web vulnerability scanner outside ADFA-LD families & dense request and response loops across Apache workers & 0.8608 & 99.2\% \\
+Shellshock & CGI/bash CVE workflow absent from ADFA-LD & short bash execution phase after Apache CGI handling & 0.6227 & 29.5\% \\
+Cryptominer & CPU resource-abuse simulation absent from ADFA-LD & thread and CPU-loop behavior with limited syscall diversity & 0.7040 & 55.3\% \\
+\bottomrule
+\end{tabular}
+}
+\end{table}
+
+SQLMap and Nikto transfer best. They produce repeated web probing behavior, so the abnormal pattern appears in most windows. Reverse Shell and Cryptominer are in the middle. Shellshock is the weakest novel row: every trace is detected at least once, but most windows remain below threshold.
+
+\section{Interpretation}
+
+\subsection{Trace-level detection is strong}
+
+The trace-level rule is sensitive. Almost every attack trace has at least one window above \(\tau^*\). This supports a limited but useful claim: the detector often recognizes attack presence in real traces, including in families that were not part of ADFA-LD training.
+
+\subsection{Trace-DR is not the same as deployment quality}
+
+Trace-DR can be high even when the window ranking is weak. A trace is counted as detected after one flagged window. Long traces have many chances to cross the threshold. For that reason, Trace-DR should always be shown with Window-DR, AUC, and low-FPR TPR.
+
+Java Meterpreter and Shellshock make this point clearly. Both are detected at trace level, but their Window-DR values are only 30.1\% and 29.5\%. That means the detector sees some abnormal windows, not that every phase of the attack is cleanly localized.
+
+\subsection{The main weakness is calibration under environment shift}
+
+The current threshold was calibrated on ADFA-LD. The real traces come from newer services, newer runtimes, and a newer kernel. Modern OpenSSH, Apache/PHP, JVM, and system utilities emit syscall patterns that can look benign relative to the old ADFA-LD distribution.
+
+This explains the shape of the results. SQLMap and Nikto remain strong because their attack behavior is dense and repeated. Java Meterpreter weakens because the JVM runtime dominates many windows. Shellshock weakens because the exploit phase is short.
+
+\subsection{No obvious ABI failure is visible}
+
+The sampled score rows use the i386 syscall ABI and show no OOV mapping problem. This does not prove preprocessing is perfect, but it argues against a simple syscall-name mapping bug as the main reason for weaker rows.
+
+\section{Conclusion}
+
+The current real-attack evaluation supports a careful conclusion. The Phase 5 fusion detector generalizes well enough to flag nearly all real attack traces at least once, including several novel families. That is an attack-presence result.
+
+The stronger operational claim is not yet supported. Window-level ranking and low-FPR behavior vary across families, especially Java Meterpreter, Shellshock, Hydra SSH, and Adduser. The likely cause is the combination of kernel/runtime shift, service overhead, and a fixed threshold calibrated on ADFA-LD.
+
+For reporting, the safest wording is:
+
+\begin{quote}
+The detector shows strong trace-level attack-presence detection on real captures, but its ADFA-LD-calibrated threshold does not provide stable low-FPR window-level behavior across all families.
+\end{quote}
+
+\end{document}

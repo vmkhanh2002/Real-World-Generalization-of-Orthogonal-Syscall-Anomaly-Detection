@@ -1,0 +1,15 @@
+{
+  "policy_name": "rolling_hysteresis_canonical_v1",
+  "warmup_windows": 3,
+  "rolling_window": 25,
+  "phase5_tau": 0.401214,
+  "trigger": {
+    "rolling_mean_prob_gte": 0.6,
+    "rolling_positive_rate_gte": 0.6,
+    "rolling_consecutive_positive_gte": 3
+  },
+  "clear": {
+    "rolling_mean_prob_lte": 0.485,
+    "rolling_positive_rate_lte": 0.32
+  }
+}

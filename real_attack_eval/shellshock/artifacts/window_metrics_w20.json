@@ -1,0 +1,31 @@
+{
+  "protocol": "LOAO-replicated (50K benign pool, 40% test split, tau*=0.401214)",
+  "window_size": 20,
+  "benign_pool_size": 50000,
+  "neg_test_size": 19480,
+  "tau_star": 0.401214,
+  "seed": 42,
+  "note": "Novel family: Shellshock not in ADFA-LD; no LOAO paper constants",
+  "real_shellshock": {
+    "AUC": 0.6227,
+    "AUCPR": 0.7347,
+    "AUCPR_1to1": 0.5505,
+    "F1": 0.4168,
+    "TPR@FPR1%": 0.0216,
+    "TPR@FPR01%": 0.0,
+    "n_pos": 44799,
+    "n_neg": 19480
+  },
+  "detection_rate_by_family": {
+    "Shellshock_Real": {
+      "n_traces": 1083,
+      "detected_traces": 1083,
+      "trace_dr": 1.0,
+      "total_windows": 44799,
+      "flagged_windows": 13206,
+      "window_dr": 0.2948,
+      "median_per_trace": 0.2955,
+      "p10_per_trace": 0.1579
+    }
+  }
+}

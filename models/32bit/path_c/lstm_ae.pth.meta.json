@@ -1,0 +1,30 @@
+{
+  "schema_version": "1.0",
+  "model_class": "LSTMAESequence",
+  "init_kwargs": {
+    "vocab_size": 341,
+    "embed_dim": 16,
+    "hidden_dim": 64
+  },
+  "dataset": "32bit",
+  "source_script": "train_path_c.py",
+  "saved_at_utc": "2026-04-28T19:44:45.074473Z",
+  "extra": {
+    "epochs": 15,
+    "fraction": 0.2,
+    "hidden_dim": 64,
+    "num_layers": 1,
+    "min_samples": 5000,
+    "eval_batch_size": 512,
+    "calibration_quantile": 0.95,
+    "calibration_method": "pr_curve",
+    "gru_embed_dim": 16,
+    "cbow_embed_dim": 16,
+    "lstm_ae_embed_dim": 16,
+    "lstm_ae_hidden_dim": 64,
+    "lstm_ae_epochs": 5,
+    "cbow_epochs": 5,
+    "model_key": "LSTM_AE_Sequence",
+    "embed_dim": 16
+  }
+}

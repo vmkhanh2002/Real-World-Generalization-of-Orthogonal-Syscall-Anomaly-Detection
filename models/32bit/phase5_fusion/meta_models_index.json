@@ -1,0 +1,36 @@
+{
+    "artifact_type": "phase5_meta_model_registry",
+    "artifact_version": 1,
+    "created_utc": "2026-04-28T19:49:30Z",
+    "dataset": "32bit",
+    "selected_model_name": "XGBoost",
+    "selected_model_file": "D:\\Semi-Supervised Novel Detection via Orthogonal Feature Extraction and Meta-Classifier Assembly\\models\\32bit\\phase5_fusion\\meta_best_model.pkl",
+    "selected_model_manifest": "D:\\Semi-Supervised Novel Detection via Orthogonal Feature Extraction and Meta-Classifier Assembly\\models\\32bit\\phase5_fusion\\meta_best_model_manifest.json",
+    "models": [
+        {
+            "model_name": "Logistic_Regression",
+            "model_file": "D:\\Semi-Supervised Novel Detection via Orthogonal Feature Extraction and Meta-Classifier Assembly\\models\\32bit\\phase5_fusion\\meta_logistic_regression.pkl",
+            "manifest_file": "D:\\Semi-Supervised Novel Detection via Orthogonal Feature Extraction and Meta-Classifier Assembly\\models\\32bit\\phase5_fusion\\meta_logistic_regression_manifest.json"
+        },
+        {
+            "model_name": "Random_Forest",
+            "model_file": "D:\\Semi-Supervised Novel Detection via Orthogonal Feature Extraction and Meta-Classifier Assembly\\models\\32bit\\phase5_fusion\\meta_random_forest.pkl",
+            "manifest_file": "D:\\Semi-Supervised Novel Detection via Orthogonal Feature Extraction and Meta-Classifier Assembly\\models\\32bit\\phase5_fusion\\meta_random_forest_manifest.json"
+        },
+        {
+            "model_name": "XGBoost",
+            "model_file": "D:\\Semi-Supervised Novel Detection via Orthogonal Feature Extraction and Meta-Classifier Assembly\\models\\32bit\\phase5_fusion\\meta_xgboost.pkl",
+            "manifest_file": "D:\\Semi-Supervised Novel Detection via Orthogonal Feature Extraction and Meta-Classifier Assembly\\models\\32bit\\phase5_fusion\\meta_xgboost_manifest.json"
+        },
+        {
+            "model_name": "Support_Vector_Machine",
+            "model_file": "D:\\Semi-Supervised Novel Detection via Orthogonal Feature Extraction and Meta-Classifier Assembly\\models\\32bit\\phase5_fusion\\meta_support_vector_machine.pkl",
+            "manifest_file": "D:\\Semi-Supervised Novel Detection via Orthogonal Feature Extraction and Meta-Classifier Assembly\\models\\32bit\\phase5_fusion\\meta_support_vector_machine_manifest.json"
+        },
+        {
+            "model_name": "Neural_Network_MLP",
+            "model_file": "D:\\Semi-Supervised Novel Detection via Orthogonal Feature Extraction and Meta-Classifier Assembly\\models\\32bit\\phase5_fusion\\meta_neural_network_mlp.pkl",
+            "manifest_file": "D:\\Semi-Supervised Novel Detection via Orthogonal Feature Extraction and Meta-Classifier Assembly\\models\\32bit\\phase5_fusion\\meta_neural_network_mlp_manifest.json"
+        }
+    ]
+}

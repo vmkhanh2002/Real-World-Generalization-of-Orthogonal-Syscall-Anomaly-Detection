@@ -1,0 +1,38 @@
+{
+  "protocol": "LOAO-replicated (50K benign pool, 40% test split, tau*=0.401214)",
+  "window_size": 20,
+  "benign_pool_size": 50000,
+  "neg_test_size": 19480,
+  "tau_star": 0.401214,
+  "seed": 42,
+  "loao_java_meterpreter": {
+    "AUC": 0.914,
+    "AUCPR": 0.7654,
+    "AUCPR_1to1": 0.8742,
+    "F1": 0.7726,
+    "TPR@FPR1%": 0.0728,
+    "TPR@FPR01%": 0.014
+  },
+  "real_java_meterpreter": {
+    "AUC": 0.4723,
+    "AUCPR": 0.9936,
+    "AUCPR_1to1": 0.4773,
+    "F1": 0.4626,
+    "TPR@FPR1%": 0.0,
+    "TPR@FPR01%": 0.0,
+    "n_pos": 3853379,
+    "n_neg": 19480
+  },
+  "detection_rate_by_family": {
+    "Java_Meterpreter_Real": {
+      "n_traces": 21536,
+      "detected_traces": 21535,
+      "trace_dr": 1.0,
+      "total_windows": 3853379,
+      "flagged_windows": 1161074,
+      "window_dr": 0.3013,
+      "median_per_trace": 0.5732,
+      "p10_per_trace": 0.0667
+    }
+  }
+}

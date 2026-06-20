@@ -1,0 +1,114 @@
+{
+  "protocol": "LOAO-replicated (50K benign pool, 40% test split, tau*=0.401214)",
+  "window_size": 20,
+  "benign_pool_size": 50000,
+  "neg_test_size": 19480,
+  "tau_star": 0.401214,
+  "seed": 42,
+  "loao_adfa_ftp": {
+    "AUC": 0.9112,
+    "AUCPR": 0.738,
+    "AUCPR_1to1": 0.8786,
+    "F1": 0.7189,
+    "TPR@FPR1%": 0.0909,
+    "TPR@FPR01%": 0.0092
+  },
+  "loao_adfa_ssh": {
+    "AUC": 0.897,
+    "AUCPR": 0.7907,
+    "AUCPR_1to1": 0.8694,
+    "F1": 0.7695,
+    "TPR@FPR1%": 0.1366,
+    "TPR@FPR01%": 0.0094
+  },
+  "loao_adfa_avg": {
+    "AUC": 0.9081,
+    "AUCPR": 0.7421,
+    "AUCPR_1to1": 0.8774,
+    "F1": 0.7255,
+    "TPR@FPR1%": 0.1032,
+    "TPR@FPR01%": 0.0138
+  },
+  "adfa_hydra_ftp": {
+    "AUC": 0.8905,
+    "AUCPR": 0.8821,
+    "AUCPR_1to1": 0.8608,
+    "F1": 0.8421,
+    "TPR@FPR1%": 0.1089,
+    "TPR@FPR01%": 0.0096,
+    "n_pos": 23870,
+    "n_neg": 19480
+  },
+  "adfa_hydra_ssh": {
+    "AUC": 0.874,
+    "AUCPR": 0.9107,
+    "AUCPR_1to1": 0.8564,
+    "F1": 0.8636,
+    "TPR@FPR1%": 0.1528,
+    "TPR@FPR01%": 0.0315,
+    "n_pos": 34549,
+    "n_neg": 19480
+  },
+  "adfa_hydra_avg": {
+    "AUC": 0.8822,
+    "AUCPR": 0.8964,
+    "AUCPR_1to1": 0.8586,
+    "F1": 0.8528,
+    "TPR@FPR1%": 0.1308,
+    "TPR@FPR01%": 0.0206,
+    "n_pos": 58419,
+    "n_neg": 19480
+  },
+  "real_hydra_ftp": {
+    "AUC": 0.8684,
+    "AUCPR": 0.9855,
+    "AUCPR_1to1": 0.7945,
+    "F1": 0.9606,
+    "TPR@FPR1%": 0.0638,
+    "TPR@FPR01%": 0.0,
+    "n_pos": 358565,
+    "n_neg": 19480
+  },
+  "real_hydra_ssh": {
+    "AUC": 0.7451,
+    "AUCPR": 0.9958,
+    "AUCPR_1to1": 0.646,
+    "F1": 0.7377,
+    "TPR@FPR1%": 0.0035,
+    "TPR@FPR01%": 0.0,
+    "n_pos": 2738916,
+    "n_neg": 19480
+  },
+  "real_hydra_avg": {
+    "AUC": 0.8068,
+    "AUCPR": 0.9906,
+    "AUCPR_1to1": 0.7203,
+    "F1": 0.8492,
+    "TPR@FPR1%": 0.0336,
+    "TPR@FPR01%": 0.0,
+    "n_pos": 3097481,
+    "n_neg": 19480
+  },
+  "detection_rate_by_family": {
+    "Hydra_FTP_Real": {
+      "n_traces": 15272,
+      "detected_traces": 15272,
+      "trace_dr": 1.0,
+      "total_windows": 358565,
+      "flagged_windows": 336336,
+      "window_dr": 0.938,
+      "median_per_trace": 1.0,
+      "p10_per_trace": 0.7879
+    },
+    "Hydra_SSH_Real": {
+      "n_traces": 5360,
+      "detected_traces": 5360,
+      "trace_dr": 1.0,
+      "total_windows": 2738916,
+      "flagged_windows": 1603741,
+      "window_dr": 0.5855,
+      "median_per_trace": 0.5789,
+      "p10_per_trace": 0.4954
+    }
+  }
+}

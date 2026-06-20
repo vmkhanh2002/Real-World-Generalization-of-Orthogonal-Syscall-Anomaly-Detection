@@ -1,0 +1,59 @@
+{
+  "dataset": "32bit",
+  "path": "path_c",
+  "selected_variant": "gru",
+  "selection_source": "nested_majority",
+  "selected_variant_counts": {
+    "gru": 5
+  },
+  "calibration_protocol": "trace_holdout_split",
+  "calib_ratio": 0.5,
+  "seed": 42,
+  "tau_star": 1.4772895574569702,
+  "F1_calib": 0.4198683519240428,
+  "calib_metrics": {
+    "AUC_ROC": 0.8112328791198677,
+    "AUPR": 0.3530897086198348,
+    "F1": 0.4198683556230208,
+    "Precision": 0.2780396710543419,
+    "Recall": 0.8570531826802361,
+    "Specificity": 0.6762091124786976,
+    "Balanced_Accuracy": 0.7666311475794669,
+    "MCC": 0.363807561992357,
+    "FPR": 0.3237908875213024,
+    "FNR": 0.14294681731976386,
+    "TP": 64171,
+    "FP": 166627,
+    "TN": 347986,
+    "FN": 10703
+  },
+  "test_metrics_reference": {
+    "AUC_ROC": 0.8190051657173959,
+    "AUPR": 0.3954133726768444,
+    "F1": 0.4427368295700383,
+    "Precision": 0.29691333649823193,
+    "Recall": 0.8700417332969305,
+    "Specificity": 0.6866140361979496,
+    "Balanced_Accuracy": 0.77832788474744,
+    "MCC": 0.3869115381207994,
+    "FPR": 0.31338596380205036,
+    "FNR": 0.12995826670306954,
+    "TP": 66921,
+    "FP": 158468,
+    "TN": 347196,
+    "FN": 9996
+  },
+  "sizes": {
+    "calib_windows": 589487,
+    "test_windows": 582581,
+    "calib_norm_windows": 514613,
+    "calib_attack_windows": 74874,
+    "test_norm_windows": 505664,
+    "test_attack_windows": 76917,
+    "calib_norm_traces": 2186,
+    "calib_attack_traces": 373,
+    "test_norm_traces": 2186,
+    "test_attack_traces": 373
+  },
+  "created_at_utc": "2026-03-24T22:25:20.773487Z"
+}

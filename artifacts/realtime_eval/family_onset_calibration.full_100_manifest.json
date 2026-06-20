@@ -1,0 +1,33 @@
+{
+  "generated_at_utc": "2026-03-30T12:51:33Z",
+  "default": {
+    "attack_onset_fraction": 0.3,
+    "attack_end_fraction": 0.9
+  },
+  "families": {
+    "Adduser": {
+      "attack_onset_fraction": 0.2,
+      "attack_end_fraction": 0.85
+    },
+    "Hydra_FTP": {
+      "attack_onset_fraction": 0.25,
+      "attack_end_fraction": 0.9
+    },
+    "Hydra_SSH": {
+      "attack_onset_fraction": 0.2,
+      "attack_end_fraction": 0.9
+    },
+    "Java_Meterpreter": {
+      "attack_onset_fraction": 0.2,
+      "attack_end_fraction": 0.85
+    },
+    "Meterpreter": {
+      "attack_onset_fraction": 0.2,
+      "attack_end_fraction": 0.95
+    },
+    "Web_Shell": {
+      "attack_onset_fraction": 0.2,
+      "attack_end_fraction": 0.85
+    }
+  }
+}

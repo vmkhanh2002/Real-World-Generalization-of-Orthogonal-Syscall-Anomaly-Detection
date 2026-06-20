@@ -1,0 +1,18 @@
+# Dataset directory - raw strace logs and ADFA-LD data (too large for GitHub)
+datasets/
+
+# Paper source (not published yet)
+SecAI_2026/
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+.env
+
+# Experiments output
+experiments/
+
+# Window score artifacts - large generated files, recompute with run_eval.sh
+**/window_scores*.jsonl
+real_attack_eval/shared/adfa_benign_w20.jsonl
